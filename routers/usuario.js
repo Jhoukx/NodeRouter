@@ -20,9 +20,20 @@ appUsuario.use((req,res,next)=>{
 //    //res.status(200).send('Successfully')
 //});
 
-appUsuario.get('/',(req, res) => {
+appUsuario.get('/:id?',(req, res) => {
+    (req.params.id)?
     con.query(
-        `SELECT * FROM tb_usuario_M3 `,
+        `SELECT * FROM tb_usuario_M3  WHERE id =${req.params.id}`,
+        (err,data,fils)=>{
+            console.log(err);
+            console.log(data);
+            console.log(fils);
+            res.send(data);
+        }
+    )
+    :
+    con.query(
+        `SELECT * FROM tb_usuario_M3`,
         (err,data,fils)=>{
             console.log(err);
             console.log(data);
